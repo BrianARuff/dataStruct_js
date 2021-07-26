@@ -13,6 +13,9 @@ import MultiWayTree from "./MultiWayTree";
 import RoutingTable from "./RoutingTable";
 import PriorityQueue from "./PriorityQueue";
 import GraphLayout from "./GraphLayout";
+import GraphEdge from "./GraphEdge";
+import GraphNode from "./GraphNode";
+import GraphVertex from "./GraphVertex";
 
 export default {
   Array,
@@ -28,4 +31,8 @@ export default {
   List,
   MultiWayTree,
   RoutingTable,
+  GraphLayout,
+  GraphEdge,
+  GraphNode,
+  GraphVertex,
 };

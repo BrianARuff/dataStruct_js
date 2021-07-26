@@ -1,6 +1,6 @@
 {
   "name": "common-structs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A collection of popular data strcutres written in Javascript.",
   "main": "index.js",
   "scripts": {

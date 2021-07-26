@@ -1,253 +1,248 @@
-class BST {
-   constructor(data) {
-      this.data = data;
-      this.left = null;
-      this.right = null;
-   }
+export default class BST {
+  constructor(data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
 
-   insert(data) {
-      if (this.data === data) {
-         return;
-      }
+  insert(data) {
+    if (this.data === data) {
+      return;
+    }
 
-      if (this.data > data) {
-         if (this.left) {
-            this.left.insert(data);
-         } else {
-            this.left = new BST(data);
-         }
+    if (this.data > data) {
+      if (this.left) {
+        this.left.insert(data);
       } else {
-         if (this.right) {
-            this.right.insert(data);
-         } else {
-            this.right = new BST(data);
-         }
+        this.left = new BST(data);
       }
-   }
-
-   search(data) {
-      if (this.data === data) {
-         return true;
-      }
-
-      if (this.data > data) {
-         if (this.left) {
-            return this.left.search(data);
-         } else {
-            return false;
-         }
+    } else {
+      if (this.right) {
+        this.right.insert(data);
       } else {
-         if (this.right) {
-            return this.right.search(data);
-         } else {
-            return false;
-         }
+        this.right = new BST(data);
       }
-   }
+    }
+  }
 
-   inOrderTraversal(callback) {
+  search(data) {
+    if (this.data === data) {
+      return true;
+    }
+
+    if (this.data > data) {
       if (this.left) {
-         this.left.inOrderTraversal(callback);
+        return this.left.search(data);
+      } else {
+        return false;
       }
-
-      callback(this.data);
-
+    } else {
       if (this.right) {
-         this.right.inOrderTraversal(callback);
+        return this.right.search(data);
+      } else {
+        return false;
       }
-   }
+    }
+  }
 
-   preOrderTraversal(callback) {
-      callback(this.data);
+  inOrderTraversal(callback) {
+    if (this.left) {
+      this.left.inOrderTraversal(callback);
+    }
 
-      if (this.left) {
-         this.left.preOrderTraversal(callback);
-      }
+    callback(this.data);
 
-      if (this.right) {
-         this.right.preOrderTraversal(callback);
-      }
-   }
+    if (this.right) {
+      this.right.inOrderTraversal(callback);
+    }
+  }
 
-   postOrderTraversal(callback) {
-      if (this.left) {
-         this.left.postOrderTraversal(callback);
-      }
+  preOrderTraversal(callback) {
+    callback(this.data);
 
-      if (this.right) {
-         this.right.postOrderTraversal(callback);
-      }
+    if (this.left) {
+      this.left.preOrderTraversal(callback);
+    }
 
-      callback(this.data);
-   }
+    if (this.right) {
+      this.right.preOrderTraversal(callback);
+    }
+  }
 
-   getMax() {
-      if (!this.right) {
-         return this.data;
-      }
+  postOrderTraversal(callback) {
+    if (this.left) {
+      this.left.postOrderTraversal(callback);
+    }
 
-      return this.right.getMax();
-   }
+    if (this.right) {
+      this.right.postOrderTraversal(callback);
+    }
 
-   getMin() {
-      if (!this.left) {
-         return this.data;
-      }
+    callback(this.data);
+  }
 
-      return this.left.getMin();
-   }
+  getMax() {
+    if (!this.right) {
+      return this.data;
+    }
 
-   getHeight() {
-      if (!this.left && !this.right) {
-         return 0;
-      }
+    return this.right.getMax();
+  }
 
-      if (!this.left) {
-         return 1 + this.right.getHeight();
-      }
+  getMin() {
+    if (!this.left) {
+      return this.data;
+    }
 
-      if (!this.right) {
-         return 1 + this.left.getHeight();
-      }
+    return this.left.getMin();
+  }
 
-      return 1 + Math.max(this.left.getHeight(), this.right.getHeight());
-   }
+  getHeight() {
+    if (!this.left && !this.right) {
+      return 0;
+    }
 
-   getSize() {
-      if (!this.left && !this.right) {
-         return 1;
-      }
+    if (!this.left) {
+      return 1 + this.right.getHeight();
+    }
 
-      if (!this.left) {
-         return 1 + this.right.getSize();
-      }
+    if (!this.right) {
+      return 1 + this.left.getHeight();
+    }
 
-      if (!this.right) {
-         return 1 + this.left.getSize();
-      }
+    return 1 + Math.max(this.left.getHeight(), this.right.getHeight());
+  }
 
-      return 1 + this.left.getSize() + this.right.getSize();
-   }
+  getSize() {
+    if (!this.left && !this.right) {
+      return 1;
+    }
 
-   getBalance() {
-      if (!this.left && !this.right) {
-         return 0;
-      }
+    if (!this.left) {
+      return 1 + this.right.getSize();
+    }
 
-      if (!this.left) {
-         return this.right.getHeight();
-      }
+    if (!this.right) {
+      return 1 + this.left.getSize();
+    }
 
-      if (!this.right) {
-         return -this.left.getHeight();
-      }
+    return 1 + this.left.getSize() + this.right.getSize();
+  }
 
-      return this.right.getHeight() - this.left.getHeight();
-   }
+  getBalance() {
+    if (!this.left && !this.right) {
+      return 0;
+    }
 
-   getLevel() {
-      if (!this.left && !this.right) {
-         return 0;
-      }
+    if (!this.left) {
+      return this.right.getHeight();
+    }
 
-      if (!this.left) {
-         return this.right.getLevel() + 1;
-      }
+    if (!this.right) {
+      return -this.left.getHeight();
+    }
 
-      if (!this.right) {
-         return this.left.getLevel() + 1;
-      }
+    return this.right.getHeight() - this.left.getHeight();
+  }
 
-      return Math.max(this.left.getLevel(), this.right.getLevel()) + 1;
-   }
+  getLevel() {
+    if (!this.left && !this.right) {
+      return 0;
+    }
 
-   getLeafCount() {
-      if (!this.left && !this.right) {
-         return 1;
-      }
+    if (!this.left) {
+      return this.right.getLevel() + 1;
+    }
 
-      if (!this.left) {
-         return this.right.getLeafCount();
-      }
+    if (!this.right) {
+      return this.left.getLevel() + 1;
+    }
 
-      if (!this.right) {
-         return this.left.getLeafCount();
-      }
+    return Math.max(this.left.getLevel(), this.right.getLevel()) + 1;
+  }
 
-      return this.left.getLeafCount() + this.right.getLeafCount();
-   }
+  getLeafCount() {
+    if (!this.left && !this.right) {
+      return 1;
+    }
 
-   getInternalNodeCount() {
-      if (!this.left && !this.right) {
-         return 0;
-      }
+    if (!this.left) {
+      return this.right.getLeafCount();
+    }
 
-      if (!this.left) {
-         return this.right.getInternalNodeCount();
-      }
+    if (!this.right) {
+      return this.left.getLeafCount();
+    }
 
-      if (!this.right) {
-         return this.left.getInternalNodeCount();
-      }
+    return this.left.getLeafCount() + this.right.getLeafCount();
+  }
 
-      return (
-         this.left.getInternalNodeCount() + this.right.getInternalNodeCount()
-      );
-   }
+  getInternalNodeCount() {
+    if (!this.left && !this.right) {
+      return 0;
+    }
 
-   getExternalNodeCount() {
-      if (!this.left && !this.right) {
-         return 1;
-      }
+    if (!this.left) {
+      return this.right.getInternalNodeCount();
+    }
 
-      if (!this.left) {
-         return this.right.getExternalNodeCount();
-      }
+    if (!this.right) {
+      return this.left.getInternalNodeCount();
+    }
 
-      if (!this.right) {
-         return this.left.getExternalNodeCount();
-      }
+    return this.left.getInternalNodeCount() + this.right.getInternalNodeCount();
+  }
 
-      return (
-         this.left.getExternalNodeCount() + this.right.getExternalNodeCount()
-      );
-   }
+  getExternalNodeCount() {
+    if (!this.left && !this.right) {
+      return 1;
+    }
 
-   getLeafToInternalRatio() {
-      if (!this.left && !this.right) {
-         return 0;
-      }
+    if (!this.left) {
+      return this.right.getExternalNodeCount();
+    }
 
-      if (!this.left) {
-         return this.right.getLeafToInternalRatio();
-      }
+    if (!this.right) {
+      return this.left.getExternalNodeCount();
+    }
 
-      if (!this.right) {
-         return this.left.getLeafToInternalRatio();
-      }
+    return this.left.getExternalNodeCount() + this.right.getExternalNodeCount();
+  }
 
-      return (
-         this.left.getLeafToInternalRatio() +
-         this.right.getLeafToInternalRatio()
-      );
-   }
+  getLeafToInternalRatio() {
+    if (!this.left && !this.right) {
+      return 0;
+    }
 
-   getInternalToExternalRatio() {
-      if (!this.left && !this.right) {
-         return 0;
-      }
+    if (!this.left) {
+      return this.right.getLeafToInternalRatio();
+    }
 
-      if (!this.left) {
-         return this.right.getInternalToExternalRatio();
-      }
+    if (!this.right) {
+      return this.left.getLeafToInternalRatio();
+    }
 
-      if (!this.right) {
-         return this.left.getInternalToExternalRatio();
-      }
+    return (
+      this.left.getLeafToInternalRatio() + this.right.getLeafToInternalRatio()
+    );
+  }
 
-      return (
-         this.left.getInternalToExternalRatio() +
-         this.right.getInternalToExternalRatio()
-      );
-   }
+  getInternalToExternalRatio() {
+    if (!this.left && !this.right) {
+      return 0;
+    }
+
+    if (!this.left) {
+      return this.right.getInternalToExternalRatio();
+    }
+
+    if (!this.right) {
+      return this.left.getInternalToExternalRatio();
+    }
+
+    return (
+      this.left.getInternalToExternalRatio() +
+      this.right.getInternalToExternalRatio()
+    );
+  }
 }

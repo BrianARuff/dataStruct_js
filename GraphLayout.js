@@ -1,4 +1,4 @@
-class GraphLayout {
+export default class GraphLayout {
   constructor(graph, options) {
     this.graph = graph;
     this.options = options;
