@@ -1,5 +1,5 @@
 {
-  "name": "data-structures-js",
+  "name": "common-structs",
   "version": "1.0.0",
   "description": "A collection of popular data strcutres written in Javascript.",
   "main": "index.js",
