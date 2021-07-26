@@ -1,5 +1,5 @@
 {
-  "name": "datastruct.js",
+  "name": "data-struct.js",
   "version": "1.0.0",
   "description": "A collection of popular data strcutres written in Javascript.",
   "main": "index.js",
