@@ -16,6 +16,12 @@ export default class Graph {
     this.nodeMap = this.graph.nodeMap;
     this.linkMap = this.graph.linkMap;
   }
+  nodeMap() {
+    return this.nodeMap;
+  }
+  linkMap() {
+    return this.linkMap;
+  }
   getNode(id) {
     return this.nodeMap[id];
   }
