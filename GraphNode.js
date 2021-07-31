@@ -29,6 +29,16 @@ export default class GraphNode {
     this.data = data;
   }
 
+  getOtherNode(node) {
+    let otherNode = null;
+    this.edges.forEach((edge) => {
+      if (edge.getOtherNode(this) === node) {
+        otherNode = edge.getOtherNode(this);
+      }
+    });
+    return otherNode;
+  }
+
   getNeighbors() {
     let neighbors = [];
     this.edges.forEach((edge) => {
